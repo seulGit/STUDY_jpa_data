@@ -1,6 +1,5 @@
 package study.data_jpa.controller;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,14 +29,14 @@ public class MemberController {
     }
 
     @GetMapping("/members")
-    public Page<MemberDto> list(@PageableDefault(size = 5, sort = "username") Pageable pageable) {
+    public Page<MemberDto> list(@PageableDefault(size = 5) Pageable pageable) {
         return memberRepository.findAll(pageable).map(MemberDto::new);
     }
 
-    @PostConstruct
-    public void init() {
-        for (int i = 0; i < 100; i++) {
-            memberRepository.save(new Member("user" + i, i));
-        }
-    }
+//    @PostConstruct
+//    public void init() {
+//        for (int i = 0; i < 100; i++) {
+//            memberRepository.save(new Member("user" + i, i));
+//        }
+//    }
 }
